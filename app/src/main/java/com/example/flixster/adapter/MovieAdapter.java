@@ -25,6 +25,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.flixster.R;
 import com.example.flixster.models.Movie;
+import com.example.flixster.DetailActvity;
 
 import java.util.List;
 
