@@ -1,5 +1,6 @@
 package com.example.flixster.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -27,7 +29,11 @@ import com.example.flixster.R;
 import com.example.flixster.models.Movie;
 import com.example.flixster.DetailActvity;
 
+import org.parceler.Parcels;
+
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>
 {
@@ -105,6 +111,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>
 
             Glide.with(context)
                     .load(imageUrl)
+                    .fitCenter() // scale to fit entire image within ImageView
+                    .transform(new RoundedCornersTransformation(30, 10))
                     .error(R.drawable.ic_baseline_warning_24)
                     .listener(new RequestListener<Drawable>() {
                         @Override
@@ -128,10 +136,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>
                 public void onClick(View view)
                 {
                     // 2. Naviagtion to a new activity on tap
-                    Intent i = new Intent(context, DetailActivity.class);
-                    i.putExtra("title", movie.getTitle());
-                    context.startActivity(i);
+                    Intent i = new Intent(context, DetailActvity.class);
+                    i.putExtra("movie", Parcels.wrap(movie));
+
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation((Activity) context, (View)tvTitle, "movieTitleTransition");
+                    context.startActivity(i, options.toBundle());
                 }
+
             });
         }
     }

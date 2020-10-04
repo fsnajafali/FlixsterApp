@@ -5,7 +5,8 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#0B0B0B">
+    android:background="#0B0B0B"
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/ivPoster"
@@ -39,12 +40,14 @@
         android:layout_toEndOf="@+id/ivPoster"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
+        android:textStyle="bold"
+        android:transitionName="movieTitleTransition"
         tools:text="The Crimes That Bin" />
 
     <TextView
         android:id="@+id/tvOverview"
         android:layout_width="355dp"
-        android:layout_height="49dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
         android:layout_marginStart="9dp"
         android:layout_marginTop="5dp"
